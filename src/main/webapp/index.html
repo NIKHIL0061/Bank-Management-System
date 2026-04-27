@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusBank — Secure Login</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏦</text></svg>">
+</head>
+<body>
+
+<div class="auth-wrapper">
+
+  <!-- Left: Branding Panel -->
+  <div class="auth-brand">
+    <a href="#" class="brand-logo">
+      <div class="brand-logo-icon">🏦</div>
+      <span class="brand-logo-text">Nexus<span>Bank</span></span>
+    </a>
+
+    <div class="brand-hero">
+      <h1 class="brand-tagline">
+        Banking that<br><em>works for you,</em><br>not against you.
+      </h1>
+      <p class="brand-desc">
+        Trusted by millions. Secured by the highest industry standards.
+        Manage your finances with clarity and confidence.
+      </p>
+    </div>
+
+    <div class="brand-stats">
+      <div>
+        <div class="brand-stat-value">2M+</div>
+        <div class="brand-stat-label">Customers</div>
+      </div>
+      <div>
+        <div class="brand-stat-value">₹50B+</div>
+        <div class="brand-stat-label">Assets</div>
+      </div>
+      <div>
+        <div class="brand-stat-value">99.9%</div>
+        <div class="brand-stat-label">Uptime</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: Login Form -->
+  <div class="auth-form-panel">
+    <div class="auth-card">
+
+      <div class="auth-card-header">
+        <h2 class="auth-card-title">Welcome back</h2>
+        <p class="auth-card-subtitle">Sign in to your account to continue</p>
+      </div>
+
+      <script>
+        const p = new URLSearchParams(window.location.search);
+        if (p.has('error'))
+          document.write('<div class="alert alert-error">⚠️ ' + decodeURIComponent(p.get('error')) + '</div>');
+        if (p.has('success'))
+          document.write('<div class="alert alert-success">✅ ' + decodeURIComponent(p.get('success')) + '</div>');
+      </script>
+
+      <form action="auth" method="POST">
+        <input type="hidden" name="action" value="login">
+
+        <div class="form-group">
+          <label class="form-label" for="username">Username</label>
+          <div class="input-wrap">
+            <span class="input-icon">👤</span>
+            <input class="form-input" type="text" id="username" name="username"
+                   placeholder="Enter your username" required autocomplete="username">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <div class="input-wrap">
+            <span class="input-icon">🔒</span>
+            <input class="form-input" type="password" id="password" name="password"
+                   placeholder="Enter your password" required autocomplete="current-password">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="margin-top: 8px;">
+          🔐 &nbsp;Sign In Securely
+        </button>
+      </form>
+
+      <div class="divider">or</div>
+
+      <div class="auth-footer-link">
+        New customer? <a href="register.html">Open an account →</a>
+      </div>
+
+      <div style="margin-top: 28px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; color: var(--gray-300);">
+        🔒 256-bit SSL Encrypted &nbsp;|&nbsp; 🛡️ RBI Regulated
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

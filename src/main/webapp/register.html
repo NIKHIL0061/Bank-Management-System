@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusBank — Open Account</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏦</text></svg>">
+</head>
+<body>
+
+<div class="auth-wrapper">
+
+  <!-- Left: Branding Panel -->
+  <div class="auth-brand">
+    <a href="index.html" class="brand-logo">
+      <div class="brand-logo-icon">🏦</div>
+      <span class="brand-logo-text">Nexus<span>Bank</span></span>
+    </a>
+
+    <div class="brand-hero">
+      <h1 class="brand-tagline">
+        Your <em>financial journey</em><br>starts here.
+      </h1>
+      <p class="brand-desc">
+        Open a free account in seconds. Access all our features — from instant transfers
+        to smart spending insights — right from day one.
+      </p>
+      <div style="margin-top: 32px; display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,0.7); font-size: 14px;">
+          <span style="color: var(--gold-light);">✓</span> Zero account opening fee
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,0.7); font-size: 14px;">
+          <span style="color: var(--gold-light);">✓</span> Instant account activation
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,0.7); font-size: 14px;">
+          <span style="color: var(--gold-light);">✓</span> 24/7 customer support
+        </div>
+      </div>
+    </div>
+
+    <div class="brand-stats">
+      <div>
+        <div class="brand-stat-value">Free</div>
+        <div class="brand-stat-label">Forever</div>
+      </div>
+      <div>
+        <div class="brand-stat-value">24/7</div>
+        <div class="brand-stat-label">Support</div>
+      </div>
+      <div>
+        <div class="brand-stat-value">Instant</div>
+        <div class="brand-stat-label">Setup</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: Register Form -->
+  <div class="auth-form-panel">
+    <div class="auth-card">
+
+      <div class="auth-card-header">
+        <h2 class="auth-card-title">Create your account</h2>
+        <p class="auth-card-subtitle">Join millions of happy NexusBank customers</p>
+      </div>
+
+      <script>
+        const p = new URLSearchParams(window.location.search);
+        if (p.has('error'))
+          document.write('<div class="alert alert-error">⚠️ ' + decodeURIComponent(p.get('error')) + '</div>');
+      </script>
+
+      <form action="auth" method="POST" id="registerForm">
+        <input type="hidden" name="action" value="register">
+
+        <div class="form-group">
+          <label class="form-label" for="username">Choose Username</label>
+          <div class="input-wrap">
+            <span class="input-icon">👤</span>
+            <input class="form-input" type="text" id="username" name="username"
+                   placeholder="e.g. nikhil_sharma" required autocomplete="username">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password">Create Password</label>
+          <div class="input-wrap">
+            <span class="input-icon">🔒</span>
+            <input class="form-input" type="password" id="password" name="password"
+                   placeholder="Minimum 6 characters" required autocomplete="new-password">
+          </div>
+        </div>
+
+        <!-- Password strength bar -->
+        <div id="strengthBar" style="height:4px; border-radius:4px; background: var(--gray-100); margin-top:-12px; margin-bottom:16px; overflow:hidden;">
+          <div id="strengthFill" style="height:100%; width:0; border-radius:4px; transition: width 0.3s, background 0.3s;"></div>
+        </div>
+        <div id="strengthText" style="font-size:12px; color:var(--gray-300); margin-top:-10px; margin-bottom:16px;"></div>
+
+        <button type="submit" class="btn btn-primary" style="margin-top: 8px;">
+          🚀 &nbsp;Open My Account
+        </button>
+      </form>
+
+      <div class="auth-footer-link" style="margin-top: 20px;">
+        Already have an account? <a href="index.html">Sign in →</a>
+      </div>
+
+      <div style="margin-top: 24px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; color: var(--gray-300);">
+        🔒 256-bit SSL Encrypted &nbsp;|&nbsp; 🛡️ RBI Regulated
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Password strength indicator
+  const pwdInput = document.getElementById('password');
+  const fill     = document.getElementById('strengthFill');
+  const text     = document.getElementById('strengthText');
+
+  pwdInput.addEventListener('input', () => {
+    const val = pwdInput.value;
+    let score = 0;
+    if (val.length >= 6) score++;
+    if (val.length >= 10) score++;
+    if (/[A-Z]/.test(val)) score++;
+    if (/[0-9]/.test(val)) score++;
+    if (/[^A-Za-z0-9]/.test(val)) score++;
+
+    const levels = ['', 'Weak', 'Fair', 'Good', 'Strong', 'Very Strong'];
+    const colors = ['', '#DC2626', '#F59E0B', '#3B82F6', '#059669', '#047857'];
+    const pcts   = ['0%', '20%', '40%', '65%', '85%', '100%'];
+
+    fill.style.width      = val.length ? pcts[score] : '0%';
+    fill.style.background = colors[score] || colors[1];
+    text.textContent      = val.length ? levels[score] : '';
+    text.style.color      = colors[score] || '';
+  });
+</script>
+
+</body>
+</html>
